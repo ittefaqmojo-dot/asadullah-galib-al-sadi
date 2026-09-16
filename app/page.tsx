@@ -284,6 +284,26 @@ export default function Home() {
 
   const t = copy[lang];
 
+  /*
+   * Language অনুযায়ী Reports page
+   */
+  const reportsPage =
+    lang === "bn"
+      ? "/bn/reports"
+      : "/en/reports";
+
+  /*
+   * Navigation links
+   */
+  const navLinks = [
+    "#home",
+    "#about",
+    reportsPage,
+    "#photography",
+    "#multimedia",
+    "#contact",
+  ];
+
   useEffect(() => {
     document.documentElement.lang =
       lang === "bn" ? "bn" : "en";
@@ -396,16 +416,8 @@ export default function Home() {
             (item, index) => (
               <a
                 key={item}
-                href={
-                  [
-                    "#home",
-                    "#about",
-                    "#reports",
-                    "#photography",
-                    "#multimedia",
-                    "#contact",
-                  ][index]
-                }
+                href={navLinks[index]}
+                onClick={closeMenu}
               >
                 {item}
               </a>
@@ -531,16 +543,7 @@ export default function Home() {
                 (item, index) => (
                   <a
                     key={item}
-                    href={
-                      [
-                        "#home",
-                        "#about",
-                        "#reports",
-                        "#photography",
-                        "#multimedia",
-                        "#contact",
-                      ][index]
-                    }
+                    href={navLinks[index]}
                     onClick={closeMenu}
                   >
                     <span>
@@ -610,7 +613,7 @@ export default function Home() {
 
             <a
               className="button button-primary"
-              href="#reports"
+              href={reportsPage}
             >
               {t.reports}
 
@@ -700,6 +703,7 @@ export default function Home() {
                   lang === "bn"
                     ? "রিপোর্ট"
                     : "REPORTS",
+                href: reportsPage,
               },
 
               {
@@ -709,6 +713,7 @@ export default function Home() {
                   lang === "bn"
                     ? "ফিচার"
                     : "FEATURES",
+                href: "#contact",
               },
 
               {
@@ -718,12 +723,13 @@ export default function Home() {
                   lang === "bn"
                     ? "মাঠকাজ"
                     : "FIELD WORK",
+                href: "#field-work",
               },
             ].map(
               (item) => (
                 <a
                   className="work-card"
-                  href="#contact"
+                  href={item.href}
                   key={item.no}
                 >
 
@@ -774,9 +780,7 @@ export default function Home() {
 
                 <p className="eyebrow">
 
-                  {lang === "bn"
-                    ? "WORDPRESS CMS"
-                    : "WORDPRESS CMS"}
+                  WORDPRESS CMS
 
                 </p>
 
@@ -880,13 +884,14 @@ export default function Home() {
 
           <a
             className="text-link"
-            href="#contact"
+            href={reportsPage}
           >
             {t.viewAll}
 
             <ArrowUpRight
               size={17}
             />
+
           </a>
 
         </div>
